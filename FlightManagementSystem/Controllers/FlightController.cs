@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace FlightManagementSystem.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class FlightController : ControllerBase
@@ -17,14 +18,12 @@ namespace FlightManagementSystem.Controllers
             _context = context;
         }
 
-        // Get all flights Endpoint - GET
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Flight>>> GetFlights()
         {
             return await _context.Flights.ToListAsync();
         }
 
-        // Get one flight Endpoint - GET
         [HttpGet("{id}")]
         public async Task<ActionResult<Flight>> GetFlight(int id)
         {
@@ -38,7 +37,6 @@ namespace FlightManagementSystem.Controllers
             return flight;
         }
 
-        // Adding new flight Endpoint - POST
         [HttpPost]
         public async Task<ActionResult<Flight>> PostFlight(Flight flight)
         {
@@ -50,7 +48,6 @@ namespace FlightManagementSystem.Controllers
             return CreatedAtAction(nameof(GetFlight), new { id = flight.Id }, flight);
         }
 
-        // Update data Endpoint - PUT
         [HttpPut("{id}")]
         public async Task<IActionResult> PutFlight(int id, Flight flight)
         {
@@ -73,7 +70,6 @@ namespace FlightManagementSystem.Controllers
             return NoContent();
         }
 
-        // Delete flight Endpoint - DELETE
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteFlight([FromRoute] int id)
         {

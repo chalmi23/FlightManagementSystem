@@ -7,5 +7,6 @@ namespace FlightManagementSystem.Data
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
         public DbSet<Flight> Flights { get; set; }
+        public DbSet<Users> Users { get; set; }
     }
 }
