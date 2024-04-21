@@ -6,6 +6,7 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -31,6 +32,11 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
         options => options.EnableRetryOnFailure()));
 
 var app = builder.Build();
+
+app.UseCors(options => options
+    .AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader());
 
 if (app.Environment.IsDevelopment())
 {

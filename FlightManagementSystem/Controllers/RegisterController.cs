@@ -29,7 +29,7 @@ namespace FlightManagementSystem.Controllers
                 _context.Users.Add(user);
                 await _context.SaveChangesAsync();
 
-                return Ok("Account successfully created.");
+                return Ok(new { message = "Account successfully created." });
             }
 
             return BadRequest("Incorrect input.");
